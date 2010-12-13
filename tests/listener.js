@@ -203,6 +203,21 @@ module.exports = {
         _server.close();
       }
     });
+  },
+
+  'test accessing all connected clients': function(assert) {
+	var _server = server()
+	  , _socket = socket(_server);
+	
+	listen(_server, function() {
+		var _client1 = client(_server)
+		  , _client2 = client(_server);
+
+		assert.ok(listen.clients().length === 2);
+		_client1.close();
+		_client2.close();
+		_server.close();
+		});
   }
 
 };
